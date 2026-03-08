@@ -30,6 +30,22 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
+      - name: Setup Express Server for Azure Web App
+        working-directory: ./app
+        run: |
+          cd dist
+          npm init -y
+          npm install express
+          cat << 'EOF' > server.js
+          const express = require('express');
+          const path = require('path');
+          const app = express();
+          const port = process.env.PORT || 8080;
+          app.use(express.static(path.join(__dirname, '/')));
+          app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+          app.listen(port, () => console.log('Server listening on port ' + port));
+          EOF
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
