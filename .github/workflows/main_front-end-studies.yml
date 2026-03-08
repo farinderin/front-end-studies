@@ -30,36 +30,18 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
-      - name: Setup Web.config for Azure IIS
+      - name: Setup Node SSR for Azure App Service
         working-directory: ./app
         run: |
           cd dist
-          cat << 'EOF' > web.config
-          <?xml version="1.0" encoding="utf-8"?>
-          <configuration>
-            <system.webServer>
-              <rewrite>
-                <rules>
-                  <rule name="SPA fallback" stopProcessing="true">
-                    <match url=".*" />
-                    <conditions logicalGrouping="MatchAll">
-                      <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
-                      <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
-                    </conditions>
-                    <action type="Rewrite" url="/index.html" />
-                  </rule>
-                </rules>
-              </rewrite>
-              <staticContent>
-                <remove fileExtension=".mjs" />
-                <mimeMap fileExtension=".mjs" mimeType="text/javascript" />
-                <remove fileExtension=".woff" />
-                <mimeMap fileExtension=".woff" mimeType="application/font-woff" />
-                <remove fileExtension=".woff2" />
-                <mimeMap fileExtension=".woff2" mimeType="font/woff2" />
-              </staticContent>
-            </system.webServer>
-          </configuration>
+          cat << 'EOF' > package.json
+          {
+            "name": "astro-app",
+            "version": "1.0.0",
+            "scripts": {
+              "start": "HOST=0.0.0.0 PORT=8080 node ./server/entry.mjs"
+            }
+          }
           EOF
 
       - name: Upload artifact for deployment job
