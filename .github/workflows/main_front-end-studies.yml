@@ -30,47 +30,36 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
-      - name: Setup Express Server for Azure Web App
+      - name: Setup Web.config for Azure IIS
         working-directory: ./app
         run: |
           cd dist
-          npm init -y
-          npm install express
-          cat << 'EOF' > server.js
-          const express = require('express');
-          const path = require('path');
-          const fs = require('fs');
-          const app = express();
-          const port = process.env.PORT || 8080;
-          
-          app.get('*', (req, res) => {
-            try {
-              let reqPath = req.path;
-              if (reqPath.endsWith('/')) {
-                reqPath = reqPath.slice(0, -1);
-              }
-              if (reqPath === '') {
-                reqPath = '/index.html';
-              }
-              
-              const exactFilePath = path.join(__dirname, reqPath);
-              if (fs.existsSync(exactFilePath) && fs.statSync(exactFilePath).isFile()) {
-                return res.sendFile(exactFilePath);
-              }
-              
-              const dirIndexPath = path.join(__dirname, reqPath, 'index.html');
-              if (fs.existsSync(dirIndexPath) && fs.statSync(dirIndexPath).isFile()) {
-                return res.sendFile(dirIndexPath);
-              }
-              
-              res.sendFile(path.join(__dirname, 'index.html'));
-            } catch (err) {
-              console.error(err);
-              res.status(500).send('Server Error');
-            }
-          });
-          
-          app.listen(port, () => console.log('Server listening on port ' + port));
+          cat << 'EOF' > web.config
+          <?xml version="1.0" encoding="utf-8"?>
+          <configuration>
+            <system.webServer>
+              <rewrite>
+                <rules>
+                  <rule name="SPA fallback" stopProcessing="true">
+                    <match url=".*" />
+                    <conditions logicalGrouping="MatchAll">
+                      <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+                      <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="/index.html" />
+                  </rule>
+                </rules>
+              </rewrite>
+              <staticContent>
+                <remove fileExtension=".mjs" />
+                <mimeMap fileExtension=".mjs" mimeType="text/javascript" />
+                <remove fileExtension=".woff" />
+                <mimeMap fileExtension=".woff" mimeType="application/font-woff" />
+                <remove fileExtension=".woff2" />
+                <mimeMap fileExtension=".woff2" mimeType="font/woff2" />
+              </staticContent>
+            </system.webServer>
+          </configuration>
           EOF
 
       - name: Upload artifact for deployment job
