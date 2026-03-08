@@ -6,21 +6,23 @@ import { frameworks } from '../data/frameworks';
 <BaseLayout title="Accueil">
   <!-- Hero -->
   <section class="max-w-4xl mx-auto px-4 pt-20 pb-16 text-center">
-    <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-4">Ecosysteme Web 2025–2026</p>
-    <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+    <p class="text-sm font-semibold uppercase tracking-widest mb-4" style="color: var(--secondary-foret);">Ecosysteme Web 2025–2026</p>
+    <h1 class="text-4xl sm:text-5xl font-bold mb-6 leading-tight" style="color: var(--primary-abime);">
       Quel framework frontend<br />choisir pour votre projet ?
     </h1>
-    <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
+    <p class="text-lg mb-10 max-w-2xl mx-auto" style="color: #475569;">
       Synthese basee sur les donnees 2025–2026 : benchmarks, cas d'utilisation,
       courbes d'apprentissage et recommandations AI-first.
     </p>
     <div class="flex flex-wrap gap-4 justify-center">
       <a href="/wizard"
-        class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+        class="text-white font-semibold px-6 py-3 rounded-lg transition-opacity hover:opacity-90"
+        style="background-color: var(--accent-balise);">
         Demarrer le wizard →
       </a>
       <a href="/compare"
-        class="border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+        class="border font-semibold px-6 py-3 rounded-lg transition-colors hover:opacity-80"
+        style="border-color: var(--primary-abime); color: var(--primary-abime);">
         Voir la matrice
       </a>
     </div>
@@ -28,27 +30,28 @@ import { frameworks } from '../data/frameworks';
 
   <!-- Cards frameworks -->
   <section class="max-w-7xl mx-auto px-4 pb-20">
-    <h2 class="text-xl font-semibold text-gray-300 mb-8 text-center">Les 5 frameworks couverts</h2>
+    <h2 class="text-xl font-semibold mb-8 text-center" style="color: var(--primary-abime);">Les 5 frameworks couverts</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
       {frameworks.map((f) => (
         <a href={`/frameworks/${f.id}`}
-          class="group bg-gray-900 border border-gray-800 hover:border-gray-600 rounded-xl p-5 transition-all hover:-translate-y-1">
+          class="group bg-white border rounded-xl p-5 transition-all hover:-translate-y-1"
+          style="border-color: var(--neutral-calcaire);">
           <div class="text-3xl mb-3">{f.icon}</div>
-          <div class="font-bold text-white text-lg">{f.name} <span class="text-xs text-gray-500">{f.version}</span></div>
-          <div class="text-xs text-gray-400 mt-1 mb-4">{f.tagline}</div>
+          <div class="font-bold text-lg" style="color: var(--primary-abime);">{f.name} <span class="text-xs" style="color: #94a3b8;">{f.version}</span></div>
+          <div class="text-xs mt-1 mb-4" style="color: #475569;">{f.tagline}</div>
           <div class="flex flex-wrap gap-1">
             {f.renderPatterns.slice(0, 3).map(p => (
-              <span class="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">{p}</span>
+              <span class="text-xs px-2 py-0.5 rounded font-mono" style="background-color: var(--neutral-calcaire); color: var(--primary-abime);">{p}</span>
             ))}
           </div>
           <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
-            <div class="bg-gray-800 rounded p-2">
-              <div class="text-gray-500">Bundle</div>
-              <div class="text-white font-mono">{f.benchmarks.bundleStarter}</div>
+            <div class="rounded p-2" style="background-color: var(--neutral-calcaire);">
+              <div style="color: #64748b;">Bundle</div>
+              <div class="font-mono font-semibold" style="color: var(--primary-abime);">{f.benchmarks.bundleStarter}</div>
             </div>
-            <div class="bg-gray-800 rounded p-2">
-              <div class="text-gray-500">TTI</div>
-              <div class="text-white font-mono">{f.benchmarks.tti}</div>
+            <div class="rounded p-2" style="background-color: var(--neutral-calcaire);">
+              <div style="color: #64748b;">TTI</div>
+              <div class="font-mono font-semibold" style="color: var(--primary-abime);">{f.benchmarks.tti}</div>
             </div>
           </div>
         </a>
@@ -58,8 +61,8 @@ import { frameworks } from '../data/frameworks';
 
   <!-- Decision rapide -->
   <section class="max-w-4xl mx-auto px-4 pb-20">
-    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8">
-      <h2 class="text-xl font-bold text-white mb-6">Recommandation rapide</h2>
+    <div class="bg-white border rounded-2xl p-8" style="border-color: var(--neutral-calcaire);">
+      <h2 class="text-xl font-bold mb-6" style="color: var(--primary-abime);">Recommandation rapide</h2>
       <div class="grid gap-3">
         {[
           { need: 'SEO & performance maximale', rec: 'Astro', id: 'astro', why: 'Zero JS par defaut, Islands Architecture' },
@@ -68,16 +71,16 @@ import { frameworks } from '../data/frameworks';
           { need: 'Application enterprise massive', rec: 'Angular', id: 'angular', why: 'Structure, DI, maintenabilite long terme' },
           { need: 'Prototype rapide / equipe junior', rec: 'Vue', id: 'vue', why: "Courbe d'apprentissage minimale" },
         ].map(row => (
-          <div class="flex items-center gap-4 p-3 bg-gray-800 rounded-lg">
-            <div class="text-sm text-gray-400 flex-1">Si votre besoin est <span class="text-white font-medium">{row.need}</span></div>
-            <div class="text-sm font-bold text-indigo-400 shrink-0">→</div>
-            <a href={`/frameworks/${row.id}`} class="text-sm font-bold text-white hover:text-indigo-300 transition-colors shrink-0">{row.rec}</a>
-            <div class="text-xs text-gray-500 hidden lg:block">{row.why}</div>
+          <div class="flex items-center gap-4 p-3 rounded-lg" style="background-color: var(--neutral-calcaire);">
+            <div class="text-sm flex-1" style="color: #475569;">Si votre besoin est <span class="font-medium" style="color: var(--primary-abime);">{row.need}</span></div>
+            <div class="text-sm font-bold shrink-0" style="color: var(--accent-balise);">→</div>
+            <a href={`/frameworks/${row.id}`} class="text-sm font-bold hover:opacity-70 transition-opacity shrink-0" style="color: var(--primary-abime);">{row.rec}</a>
+            <div class="text-xs hidden lg:block" style="color: #64748b;">{row.why}</div>
           </div>
         ))}
       </div>
       <div class="mt-6 text-center">
-        <a href="/wizard" class="text-indigo-400 hover:text-indigo-300 text-sm transition-colors">
+        <a href="/wizard" class="text-sm transition-colors hover:opacity-70" style="color: var(--accent-balise);">
           Besoin d'une recommandation personnalisee ? → Utiliser le wizard
         </a>
       </div>

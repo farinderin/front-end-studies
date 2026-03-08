@@ -28,14 +28,14 @@ const ecosystemLabel = { 'tres-grand': '★★★★ Tres grand', grand: '★★
       </div>
       <div class="flex flex-wrap gap-2">
         {f.renderPatterns.map(p => (
-          <span class="text-xs bg-gray-800 border border-gray-700 text-gray-300 px-2 py-1 rounded font-mono">{p}</span>
+          <span class="text-xs border px-2 py-1 rounded font-mono" style="background-color: var(--neutral-calcaire); border-color: #cbd5e1; color: var(--primary-abime);">{p}</span>
         ))}
       </div>
     </div>
 
     <!-- Benchmarks -->
     <section class="mb-10">
-      <h2 class="text-lg font-semibold text-white mb-4">Benchmarks</h2>
+      <h2 class="text-lg font-semibold mb-4" style="color: var(--secondary-foret);">Benchmarks</h2>
       <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
         {[
           { label: 'Bundle starter', value: f.benchmarks.bundleStarter },
@@ -44,9 +44,9 @@ const ecosystemLabel = { 'tres-grand': '★★★★ Tres grand', grand: '★★
           { label: 'Adoption', value: f.benchmarks.adoption },
           { label: 'Satisfaction', value: f.benchmarks.satisfaction },
         ].map(b => (
-          <div class="bg-gray-900 border border-gray-800 rounded-lg p-3">
-            <div class="text-xs text-gray-500 mb-1">{b.label}</div>
-            <div class="font-mono font-bold text-white">{b.value || '—'}</div>
+          <div class="bg-white border rounded-lg p-3" style="border-color: var(--neutral-calcaire);">
+            <div class="text-xs mb-1" style="color: #64748b;">{b.label}</div>
+            <div class="font-mono font-bold" style="color: var(--primary-abime);">{b.value || '—'}</div>
           </div>
         ))}
       </div>
@@ -55,11 +55,11 @@ const ecosystemLabel = { 'tres-grand': '★★★★ Tres grand', grand: '★★
     <div class="grid md:grid-cols-2 gap-8 mb-10">
       <!-- Ideal pour -->
       <section>
-        <h2 class="text-lg font-semibold text-white mb-4">✅ Ideal pour</h2>
+        <h2 class="text-lg font-semibold mb-4" style="color: var(--secondary-foret);">✅ Ideal pour</h2>
         <ul class="space-y-2">
           {f.idealFor.map(item => (
-            <li class="flex gap-2 text-sm text-gray-300">
-              <span class="text-green-500 shrink-0">•</span>
+            <li class="flex gap-2 text-sm" style="color: var(--primary-abime);">
+              <span class="shrink-0" style="color: var(--secondary-foret);">•</span>
               {item}
             </li>
           ))}
@@ -68,11 +68,11 @@ const ecosystemLabel = { 'tres-grand': '★★★★ Tres grand', grand: '★★
 
       <!-- A eviter -->
       <section>
-        <h2 class="text-lg font-semibold text-white mb-4">⚠️ A eviter si</h2>
+        <h2 class="text-lg font-semibold mb-4" style="color: var(--secondary-foret);">⚠️ A eviter si</h2>
         <ul class="space-y-2">
           {f.notIdealFor.map(item => (
-            <li class="flex gap-2 text-sm text-gray-300">
-              <span class="text-yellow-500 shrink-0">•</span>
+            <li class="flex gap-2 text-sm" style="color: var(--primary-abime);">
+              <span class="shrink-0" style="color: var(--accent-balise);">•</span>
               {item}
             </li>
           ))}
@@ -83,11 +83,11 @@ const ecosystemLabel = { 'tres-grand': '★★★★ Tres grand', grand: '★★
     <div class="grid md:grid-cols-2 gap-8 mb-10">
       <!-- Points forts -->
       <section>
-        <h2 class="text-lg font-semibold text-white mb-4">Points forts</h2>
+        <h2 class="text-lg font-semibold mb-4" style="color: var(--secondary-foret);">Points forts</h2>
         <ul class="space-y-2">
           {f.strengths.map(item => (
-            <li class="flex gap-2 text-sm text-gray-300">
-              <span class="text-indigo-400 shrink-0">+</span>
+            <li class="flex gap-2 text-sm" style="color: var(--primary-abime);">
+              <span class="shrink-0 font-bold" style="color: var(--secondary-foret);">+</span>
               {item}
             </li>
           ))}
@@ -96,11 +96,11 @@ const ecosystemLabel = { 'tres-grand': '★★★★ Tres grand', grand: '★★
 
       <!-- Points faibles -->
       <section>
-        <h2 class="text-lg font-semibold text-white mb-4">Points faibles</h2>
+        <h2 class="text-lg font-semibold mb-4" style="color: var(--secondary-foret);">Points faibles</h2>
         <ul class="space-y-2">
           {f.weaknesses.map(item => (
-            <li class="flex gap-2 text-sm text-gray-300">
-              <span class="text-red-400 shrink-0">−</span>
+            <li class="flex gap-2 text-sm" style="color: var(--primary-abime);">
+              <span class="shrink-0 font-bold text-red-500">−</span>
               {item}
             </li>
           ))}
@@ -110,40 +110,40 @@ const ecosystemLabel = { 'tres-grand': '★★★★ Tres grand', grand: '★★
 
     <!-- Caracteristiques -->
     <section class="mb-10">
-      <h2 class="text-lg font-semibold text-white mb-4">Caracteristiques</h2>
+      <h2 class="text-lg font-semibold mb-4" style="color: var(--secondary-foret);">Caracteristiques</h2>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div class="bg-gray-900 border border-gray-800 rounded-lg p-3">
-          <div class="text-xs text-gray-500 mb-1">Meta-framework</div>
-          <div class="text-sm text-white font-medium">{f.metaFramework}</div>
+        <div class="bg-white border rounded-lg p-3" style="border-color: var(--neutral-calcaire);">
+          <div class="text-xs mb-1" style="color: #64748b;">Meta-framework</div>
+          <div class="text-sm font-medium" style="color: var(--primary-abime);">{f.metaFramework}</div>
         </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-lg p-3">
-          <div class="text-xs text-gray-500 mb-1">Courbe apprentissage</div>
+        <div class="bg-white border rounded-lg p-3" style="border-color: var(--neutral-calcaire);">
+          <div class="text-xs mb-1" style="color: #64748b;">Courbe apprentissage</div>
           <div class="text-sm">{learningLabel[f.learningCurve]}</div>
         </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-lg p-3">
-          <div class="text-xs text-gray-500 mb-1">Ecosysteme</div>
-          <div class="text-sm text-yellow-400">{ecosystemLabel[f.ecosystem]}</div>
+        <div class="bg-white border rounded-lg p-3" style="border-color: var(--neutral-calcaire);">
+          <div class="text-xs mb-1" style="color: #64748b;">Ecosysteme</div>
+          <div class="text-sm" style="color: var(--accent-balise);">{ecosystemLabel[f.ecosystem]}</div>
         </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-lg p-3">
-          <div class="text-xs text-gray-500 mb-1">Mobile natif</div>
-          <div class="text-sm">{f.mobileCrossplatform ? '✅ Oui (React Native)' : '— Non'}</div>
+        <div class="bg-white border rounded-lg p-3" style="border-color: var(--neutral-calcaire);">
+          <div class="text-xs mb-1" style="color: #64748b;">Mobile natif</div>
+          <div class="text-sm" style="color: var(--primary-abime);">{f.mobileCrossplatform ? '✅ Oui (React Native)' : '— Non'}</div>
         </div>
       </div>
     </section>
 
     <!-- AI-First -->
-    <section class="mb-10 bg-gray-900 border border-gray-800 rounded-xl p-6">
-      <h2 class="text-lg font-semibold text-white mb-3">
+    <section class="mb-10 bg-white border rounded-xl p-6" style="border-left: 4px solid var(--accent-balise); border-color: var(--neutral-calcaire); border-left-color: var(--accent-balise);">
+      <h2 class="text-lg font-semibold mb-3" style="color: var(--secondary-foret);">
         🤖 Compatibilite AI-First
-        <span class="ml-2 text-yellow-400">{'★'.repeat(f.aiFirst.score)}{'☆'.repeat(5 - f.aiFirst.score)}</span>
+        <span class="ml-2" style="color: var(--accent-balise);">{'★'.repeat(f.aiFirst.score)}{'☆'.repeat(5 - f.aiFirst.score)}</span>
       </h2>
-      <p class="text-sm text-gray-300">{f.aiFirst.notes}</p>
+      <p class="text-sm" style="color: var(--primary-abime);">{f.aiFirst.notes}</p>
     </section>
 
     <!-- Navigation -->
-    <div class="flex justify-between mt-12 pt-6 border-t border-gray-800">
-      <a href="/compare" class="text-sm text-gray-400 hover:text-white transition-colors">← Matrice comparative</a>
-      <a href="/wizard" class="text-sm text-indigo-400 hover:text-indigo-300 transition-colors">Utiliser le wizard →</a>
+    <div class="flex justify-between mt-12 pt-6 border-t" style="border-color: var(--neutral-calcaire);">
+      <a href="/compare" class="text-sm transition-colors hover:opacity-70" style="color: #475569;">← Matrice comparative</a>
+      <a href="/wizard" class="text-sm transition-colors hover:opacity-70" style="color: var(--accent-balise);">Utiliser le wizard →</a>
     </div>
   </div>
 </BaseLayout>
