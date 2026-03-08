@@ -30,41 +30,11 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
-      - name: Setup Zero-Dependency Node.js Static Server
-        working-directory: ./app/dist
+      - name: Prepare dist for Azure App Service
+        working-directory: ./app
         run: |
-          cat > package.json << 'PKGJSON'
-          {"name":"static-server","type":"module","scripts":{"start":"node server.js"}}
-          PKGJSON
-          python3 << 'PYEOF'
-          server_code = r"""
-          import http from 'node:http';
-          import fs from 'node:fs';
-          import path from 'node:path';
-          import { fileURLToPath } from 'node:url';
-          const __dirname = path.dirname(fileURLToPath(import.meta.url));
-          const MIME = {'.html':'text/html','.css':'text/css','.js':'text/javascript','.mjs':'text/javascript','.json':'application/json','.svg':'image/svg+xml','.ico':'image/x-icon','.png':'image/png','.jpg':'image/jpeg','.woff':'font/woff','.woff2':'font/woff2'};
-          http.createServer((req, res) => {
-            try {
-              let p = req.url.split('?')[0].replace(/\/+$/, '') || '/index.html';
-              let full = path.join(__dirname, p);
-              let st = null;
-              try { st = fs.statSync(full); } catch(_) {}
-              if (st && st.isDirectory()) {
-                const idx = path.join(full, 'index.html');
-                try { const s2 = fs.statSync(idx); if (s2.isFile()) { full = idx; st = s2; } } catch(_) {}
-              }
-              if (!st || !st.isFile()) { full = path.join(__dirname, 'index.html'); try { st = fs.statSync(full); } catch(_) { st = null; } }
-              if (st && st.isFile()) {
-                res.writeHead(200, { 'Content-Type': MIME[path.extname(full)] || 'application/octet-stream' });
-                fs.createReadStream(full).pipe(res);
-              } else { res.writeHead(404); res.end('Not Found'); }
-            } catch(e) { console.error(e); res.writeHead(500); res.end('Error'); }
-          }).listen(process.env.PORT || 8080, () => console.log('Listening on', process.env.PORT || 8080));
-          """
-          with open('server.js', 'w') as f:
-              f.write(server_code.strip())
-          PYEOF
+          cp server.js dist/server.js
+          echo '{"name":"static-server","type":"module","scripts":{"start":"node server.js"}}' > dist/package.json
 
 
       - name: Upload artifact for deployment job
