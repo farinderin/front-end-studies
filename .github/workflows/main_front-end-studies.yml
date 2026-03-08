@@ -39,10 +39,18 @@ jobs:
           cat << 'EOF' > server.js
           const express = require('express');
           const path = require('path');
+          const fs = require('fs');
           const app = express();
           const port = process.env.PORT || 8080;
           app.use(express.static(path.join(__dirname, '/')));
-          app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+          app.get('*', (req, res) => {
+            const possibleIndexPath = path.join(__dirname, req.path, 'index.html');
+            if (fs.existsSync(possibleIndexPath)) {
+              res.sendFile(possibleIndexPath);
+            } else {
+              res.sendFile(path.join(__dirname, 'index.html'));
+            }
+          });
           app.listen(port, () => console.log('Server listening on port ' + port));
           EOF
 
