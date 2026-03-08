@@ -221,17 +221,17 @@ export default function Wizard() {
   if (result) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-center">
+        <div className="bg-white border rounded-2xl p-8 text-center" style={{ borderColor: 'var(--neutral-calcaire)' }}>
           <div className="text-5xl mb-4">{result.icon}</div>
-          <div className="text-sm text-gray-500 uppercase tracking-wider mb-2">Notre recommandation</div>
+          <div className="text-sm uppercase tracking-wider mb-2" style={{ color: '#64748b' }}>Notre recommandation</div>
           <h2 className="text-3xl font-bold mb-3" style={{ color: result.color }}>
             {result.framework}
           </h2>
-          <p className="text-gray-300 mb-6">{result.reason}</p>
+          <p className="mb-6" style={{ color: '#475569' }}>{result.reason}</p>
           <ul className="text-left space-y-2 mb-8">
             {result.points.map((p, i) => (
-              <li key={i} className="flex gap-2 text-sm text-gray-300">
-                <span className="text-indigo-400 shrink-0">→</span>
+              <li key={i} className="flex gap-2 text-sm" style={{ color: 'var(--primary-abime)' }}>
+                <span className="shrink-0 font-bold" style={{ color: 'var(--accent-balise)' }}>→</span>
                 {p}
               </li>
             ))}
@@ -239,13 +239,15 @@ export default function Wizard() {
           <div className="flex gap-3 justify-center">
             <a
               href={`/frameworks/${result.id}`}
-              className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+              className="text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-opacity hover:opacity-90"
+              style={{ backgroundColor: 'var(--accent-balise)' }}
             >
               Voir la fiche complete
             </a>
             <button
               onClick={reset}
-              className="border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold px-5 py-2.5 rounded-lg transition-colors text-sm"
+              className="border font-semibold px-5 py-2.5 rounded-lg text-sm transition-opacity hover:opacity-70"
+              style={{ borderColor: 'var(--primary-abime)', color: 'var(--primary-abime)' }}
             >
               Recommencer
             </button>
@@ -262,33 +264,40 @@ export default function Wizard() {
         {questions.map((_, i) => (
           <div
             key={i}
-            className={`h-1 flex-1 rounded-full transition-colors ${
-              i < step ? 'bg-indigo-500' : i === step ? 'bg-indigo-400' : 'bg-gray-800'
-            }`}
+            className="h-1.5 flex-1 rounded-full transition-colors"
+            style={{
+              backgroundColor: i < step
+                ? 'var(--secondary-foret)'
+                : i === step
+                  ? 'var(--accent-balise)'
+                  : 'var(--neutral-calcaire)',
+            }}
           />
         ))}
       </div>
 
       {/* Question */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8">
-        <div className="text-xs text-gray-500 mb-4">Question {step + 1} / {questions.length}</div>
-        <h2 className="text-xl font-bold text-white mb-6">{currentQuestion.text}</h2>
+      <div className="bg-white border rounded-2xl p-8" style={{ borderColor: 'var(--neutral-calcaire)' }}>
+        <div className="text-xs mb-4" style={{ color: '#64748b' }}>Question {step + 1} / {questions.length}</div>
+        <h2 className="text-xl font-bold mb-6" style={{ color: 'var(--primary-abime)' }}>{currentQuestion.text}</h2>
         <div className="grid gap-3">
           {currentQuestion.options.map(opt => (
             <button
               key={opt.value}
               onClick={() => handleAnswer(opt.value)}
-              className="flex items-center gap-3 p-4 bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-indigo-500 rounded-xl text-left transition-all"
+              className="flex items-center gap-3 p-4 border rounded-xl text-left transition-all hover:opacity-80"
+              style={{ backgroundColor: 'var(--neutral-calcaire)', borderColor: '#cbd5e1' }}
             >
               <span className="text-2xl shrink-0">{opt.icon}</span>
-              <span className="text-sm text-gray-200">{opt.label}</span>
+              <span className="text-sm" style={{ color: 'var(--primary-abime)' }}>{opt.label}</span>
             </button>
           ))}
         </div>
         {step > 0 && (
           <button
             onClick={() => setStep(step - 1)}
-            className="mt-4 text-sm text-gray-500 hover:text-gray-300 transition-colors"
+            className="mt-4 text-sm transition-opacity hover:opacity-70"
+            style={{ color: '#64748b' }}
           >
             ← Precedent
           </button>

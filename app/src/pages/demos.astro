@@ -47,83 +47,83 @@ const count = ref(0);
 <BaseLayout title="Demos Islands" description="Le meme composant implemente en React, Vue et Svelte sur la meme page Astro.">
   <div class="max-w-5xl mx-auto px-4 py-16">
     <div class="text-center mb-12">
-      <h1 class="text-3xl font-bold text-white mb-3">Islands Architecture en action</h1>
-      <p class="text-gray-400 max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold mb-3" style="color: var(--primary-abime);">Islands Architecture en action</h1>
+      <p class="max-w-2xl mx-auto" style="color: #475569;">
         Le meme composant — un compteur interactif — implemente en React, Vue et Svelte,
         tous hydrates independamment sur cette page Astro statique.
       </p>
-      <div class="mt-4 inline-flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-full px-4 py-1.5 text-xs text-gray-400">
-        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+      <div class="mt-4 inline-flex items-center gap-2 bg-white border rounded-full px-4 py-1.5 text-xs" style="border-color: var(--neutral-calcaire); color: #475569;">
+        <span class="w-2 h-2 rounded-full" style="background-color: var(--secondary-foret);"></span>
         3 islands actives — le reste de la page : 0 KB de JS
       </div>
     </div>
 
     <div class="grid md:grid-cols-3 gap-6">
       <!-- React Island -->
-      <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-        <div class="p-4 border-b border-gray-800 flex items-center gap-3">
+      <div class="bg-white border rounded-2xl overflow-hidden" style="border-color: var(--neutral-calcaire);">
+        <div class="p-4 border-b flex items-center gap-3" style="border-color: var(--neutral-calcaire); background-color: var(--primary-abime);">
           <span class="text-xl">⚛️</span>
           <div>
-            <div class="font-semibold text-white text-sm">React 19</div>
-            <div class="text-xs text-gray-500">useState + JSX</div>
+            <div class="font-semibold text-sm" style="color: var(--text-brume);">React 19</div>
+            <div class="text-xs" style="color: #94a3b8;">useState + JSX</div>
           </div>
           <div class="ml-auto flex gap-1">
-            <span class="text-xs bg-blue-900/50 text-blue-400 border border-blue-800 px-2 py-0.5 rounded">32–40 KB</span>
-            <span class="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">350ms TTI</span>
+            <span class="text-xs px-2 py-0.5 rounded" style="background-color: #1e3a5f; color: #93c5fd; border: 1px solid #1e40af;">32–40 KB</span>
+            <span class="text-xs px-2 py-0.5 rounded" style="background-color: #0f2027; color: #94a3b8;">350ms TTI</span>
           </div>
         </div>
         <CounterReact client:load />
-        <div class="p-4 border-t border-gray-800">
-          <pre class="text-xs text-gray-400 overflow-x-auto leading-relaxed"><code>{demoCode.react}</code></pre>
+        <div class="p-4 border-t" style="border-color: var(--neutral-calcaire);">
+          <pre class="code-snippet text-xs overflow-x-auto leading-relaxed rounded p-3"><code>{demoCode.react}</code></pre>
         </div>
       </div>
 
       <!-- Vue Island -->
-      <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-        <div class="p-4 border-b border-gray-800 flex items-center gap-3">
+      <div class="bg-white border rounded-2xl overflow-hidden" style="border-color: var(--neutral-calcaire);">
+        <div class="p-4 border-b flex items-center gap-3" style="border-color: var(--neutral-calcaire); background-color: var(--primary-abime);">
           <span class="text-xl">💚</span>
           <div>
-            <div class="font-semibold text-white text-sm">Vue 3.6</div>
-            <div class="text-xs text-gray-500">ref() + template</div>
+            <div class="font-semibold text-sm" style="color: var(--text-brume);">Vue 3.6</div>
+            <div class="text-xs" style="color: #94a3b8;">ref() + template</div>
           </div>
           <div class="ml-auto flex gap-1">
-            <span class="text-xs bg-green-900/50 text-green-400 border border-green-800 px-2 py-0.5 rounded">18–22 KB</span>
-            <span class="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">300ms TTI</span>
+            <span class="text-xs px-2 py-0.5 rounded" style="background-color: #14532d; color: #86efac; border: 1px solid #166534;">18–22 KB</span>
+            <span class="text-xs px-2 py-0.5 rounded" style="background-color: #0f2027; color: #94a3b8;">300ms TTI</span>
           </div>
         </div>
         <CounterVue client:load />
-        <div class="p-4 border-t border-gray-800">
-          <pre class="text-xs text-gray-400 overflow-x-auto leading-relaxed"><code>{demoCode.vue}</code></pre>
+        <div class="p-4 border-t" style="border-color: var(--neutral-calcaire);">
+          <pre class="code-snippet text-xs overflow-x-auto leading-relaxed rounded p-3"><code>{demoCode.vue}</code></pre>
         </div>
       </div>
 
       <!-- Svelte Island -->
-      <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-        <div class="p-4 border-b border-gray-800 flex items-center gap-3">
+      <div class="bg-white border rounded-2xl overflow-hidden" style="border-color: var(--neutral-calcaire);">
+        <div class="p-4 border-b flex items-center gap-3" style="border-color: var(--neutral-calcaire); background-color: var(--primary-abime);">
           <span class="text-xl">🔥</span>
           <div>
-            <div class="font-semibold text-white text-sm">Svelte 5</div>
-            <div class="text-xs text-gray-500">$state (Runes)</div>
+            <div class="font-semibold text-sm" style="color: var(--text-brume);">Svelte 5</div>
+            <div class="text-xs" style="color: #94a3b8;">$state (Runes)</div>
           </div>
           <div class="ml-auto flex gap-1">
-            <span class="text-xs bg-orange-900/50 text-orange-400 border border-orange-800 px-2 py-0.5 rounded">&lt;10 KB</span>
-            <span class="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">200ms TTI</span>
+            <span class="text-xs px-2 py-0.5 rounded" style="background-color: #7c2d12; color: #fdba74; border: 1px solid #9a3412;">&lt;10 KB</span>
+            <span class="text-xs px-2 py-0.5 rounded" style="background-color: #0f2027; color: #94a3b8;">200ms TTI</span>
           </div>
         </div>
         <CounterSvelte client:load />
-        <div class="p-4 border-t border-gray-800">
-          <pre class="text-xs text-gray-400 overflow-x-auto leading-relaxed"><code>{demoCode.svelte}</code></pre>
+        <div class="p-4 border-t" style="border-color: var(--neutral-calcaire);">
+          <pre class="code-snippet text-xs overflow-x-auto leading-relaxed rounded p-3"><code>{demoCode.svelte}</code></pre>
         </div>
       </div>
     </div>
 
     <!-- Note Islands -->
-    <div class="mt-10 bg-gray-900 border border-dashed border-gray-700 rounded-xl p-6 text-sm text-gray-400">
-      <p class="font-semibold text-white mb-2">Pourquoi Astro pour cette demo ?</p>
-      <p>
+    <div class="mt-10 bg-white border border-dashed rounded-xl p-6 text-sm" style="border-color: var(--neutral-calcaire);">
+      <p class="font-semibold mb-2" style="color: var(--primary-abime);">Pourquoi Astro pour cette demo ?</p>
+      <p style="color: #475569;">
         Astro est le seul framework qui peut embarquer des composants React, Vue et Svelte
-        <strong class="text-white"> sur la meme page</strong> via son systeme d'Islands.
-        Chaque island est hydratee independamment (<code class="text-indigo-300">client:load</code>).
+        <strong style="color: var(--primary-abime);"> sur la meme page</strong> via son systeme d'Islands.
+        Chaque island est hydratee independamment (<code class="font-mono text-xs px-1 py-0.5 rounded" style="background-color: var(--neutral-calcaire); color: var(--accent-balise);">client:load</code>).
         Le reste du contenu est du HTML statique — zero overhead, meilleur LCP.
       </p>
     </div>

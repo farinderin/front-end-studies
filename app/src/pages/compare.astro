@@ -16,18 +16,18 @@ const ecosystemLabels = { 'tres-grand': '★★★★', grand: '★★★', moye
 
 <BaseLayout title="Matrice comparative" description="Comparatif complet des frameworks frontend 2025-2026">
   <div class="max-w-7xl mx-auto px-4 py-16">
-    <h1 class="text-3xl font-bold text-white mb-2">Matrice comparative</h1>
-    <p class="text-gray-400 mb-10">Benchmarks et criteres cles pour choisir votre framework. Source : ecosysteme web 2025–2026.</p>
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--primary-abime);">Matrice comparative</h1>
+    <p class="mb-10" style="color: #475569;">Benchmarks et criteres cles pour choisir votre framework. Source : ecosysteme web 2025–2026.</p>
 
     <!-- Tableau principal -->
-    <div class="overflow-x-auto rounded-xl border border-gray-800">
+    <div class="overflow-x-auto rounded-xl border" style="border-color: var(--neutral-calcaire);">
       <table class="w-full text-sm">
         <thead>
-          <tr class="bg-gray-900 border-b border-gray-800">
-            <th class="text-left px-4 py-3 text-gray-400 font-medium w-48">Critere</th>
+          <tr class="border-b" style="background-color: var(--primary-abime); border-color: #0f1e23;">
+            <th class="text-left px-4 py-3 font-medium w-48" style="color: var(--neutral-calcaire);">Critere</th>
             {frameworks.map(f => (
               <th class="text-center px-4 py-3 font-medium">
-                <a href={`/frameworks/${f.id}`} class="hover:text-indigo-300 transition-colors">
+                <a href={`/frameworks/${f.id}`} class="hover:opacity-70 transition-opacity">
                   <span class="block text-xl mb-1">{f.icon}</span>
                   <span style={`color: ${f.color}`}>{f.name} {f.version}</span>
                 </a>
@@ -37,16 +37,16 @@ const ecosystemLabels = { 'tres-grand': '★★★★', grand: '★★★', moye
         </thead>
         <tbody>
           <!-- Benchmarks -->
-          <tr class="bg-gray-900/30">
-            <td colspan={frameworks.length + 1} class="px-4 py-2 text-xs text-indigo-400 font-semibold uppercase tracking-wider">
+          <tr>
+            <td colspan={frameworks.length + 1} class="px-4 py-2 text-xs font-semibold uppercase tracking-wider" style="background-color: var(--neutral-calcaire); color: var(--secondary-foret);">
               Benchmarks de performance
             </td>
           </tr>
           {criteria.map((c, i) => (
-            <tr class={`border-t border-gray-800 ${i % 2 === 0 ? '' : 'bg-gray-900/20'}`}>
-              <td class="px-4 py-3 text-gray-400">{c.label}</td>
+            <tr class={`border-t`} style={`border-color: var(--neutral-calcaire); ${i % 2 !== 0 ? 'background-color: #f1f5f9;' : 'background-color: white;'}`}>
+              <td class="px-4 py-3" style="color: #475569;">{c.label}</td>
               {frameworks.map(f => (
-                <td class="px-4 py-3 text-center font-mono text-white text-xs">
+                <td class="px-4 py-3 text-center font-mono text-xs font-semibold" style="color: var(--primary-abime);">
                   {f.benchmarks[c.key as keyof typeof f.benchmarks]}
                 </td>
               ))}
@@ -54,53 +54,53 @@ const ecosystemLabels = { 'tres-grand': '★★★★', grand: '★★★', moye
           ))}
 
           <!-- Caracteristiques -->
-          <tr class="bg-gray-900/30 border-t border-gray-800">
-            <td colspan={frameworks.length + 1} class="px-4 py-2 text-xs text-indigo-400 font-semibold uppercase tracking-wider">
+          <tr class="border-t">
+            <td colspan={frameworks.length + 1} class="px-4 py-2 text-xs font-semibold uppercase tracking-wider" style="background-color: var(--neutral-calcaire); color: var(--secondary-foret); border-color: var(--neutral-calcaire);">
               Caracteristiques
             </td>
           </tr>
-          <tr class="border-t border-gray-800">
-            <td class="px-4 py-3 text-gray-400">Courbe d'apprentissage</td>
+          <tr class="border-t" style="border-color: var(--neutral-calcaire); background-color: white;">
+            <td class="px-4 py-3" style="color: #475569;">Courbe d'apprentissage</td>
             {frameworks.map(f => (
               <td class="px-4 py-3 text-center text-xs">{learningLabels[f.learningCurve]}</td>
             ))}
           </tr>
-          <tr class="border-t border-gray-800 bg-gray-900/20">
-            <td class="px-4 py-3 text-gray-400">Ecosysteme</td>
+          <tr class="border-t" style="border-color: var(--neutral-calcaire); background-color: #f1f5f9;">
+            <td class="px-4 py-3" style="color: #475569;">Ecosysteme</td>
             {frameworks.map(f => (
-              <td class="px-4 py-3 text-center text-yellow-400">{ecosystemLabels[f.ecosystem]}</td>
+              <td class="px-4 py-3 text-center" style="color: var(--accent-balise);">{ecosystemLabels[f.ecosystem]}</td>
             ))}
           </tr>
-          <tr class="border-t border-gray-800">
-            <td class="px-4 py-3 text-gray-400">Mobile cross-platform</td>
+          <tr class="border-t" style="border-color: var(--neutral-calcaire); background-color: white;">
+            <td class="px-4 py-3" style="color: #475569;">Mobile cross-platform</td>
             {frameworks.map(f => (
               <td class="px-4 py-3 text-center">{f.mobileCrossplatform ? '✅' : '—'}</td>
             ))}
           </tr>
-          <tr class="border-t border-gray-800 bg-gray-900/20">
-            <td class="px-4 py-3 text-gray-400">Score AI-First</td>
+          <tr class="border-t" style="border-color: var(--neutral-calcaire); background-color: #f1f5f9;">
+            <td class="px-4 py-3" style="color: #475569;">Score AI-First</td>
             {frameworks.map(f => (
-              <td class="px-4 py-3 text-center text-yellow-400">
+              <td class="px-4 py-3 text-center" style="color: var(--accent-balise);">
                 {'★'.repeat(f.aiFirst.score)}{'☆'.repeat(5 - f.aiFirst.score)}
               </td>
             ))}
           </tr>
-          <tr class="border-t border-gray-800">
-            <td class="px-4 py-3 text-gray-400">Meta-framework</td>
+          <tr class="border-t" style="border-color: var(--neutral-calcaire); background-color: white;">
+            <td class="px-4 py-3" style="color: #475569;">Meta-framework</td>
             {frameworks.map(f => (
-              <td class="px-4 py-3 text-center text-xs text-gray-300">{f.metaFramework}</td>
+              <td class="px-4 py-3 text-center text-xs" style="color: var(--primary-abime);">{f.metaFramework}</td>
             ))}
           </tr>
 
           <!-- Patterns de rendu -->
-          <tr class="bg-gray-900/30 border-t border-gray-800">
-            <td colspan={frameworks.length + 1} class="px-4 py-2 text-xs text-indigo-400 font-semibold uppercase tracking-wider">
+          <tr class="border-t">
+            <td colspan={frameworks.length + 1} class="px-4 py-2 text-xs font-semibold uppercase tracking-wider" style="background-color: var(--neutral-calcaire); color: var(--secondary-foret); border-color: var(--neutral-calcaire);">
               Patterns de rendu
             </td>
           </tr>
           {(['SSG', 'SSR', 'SPA', 'Islands', 'Edge', 'PWA', 'ISR', 'PPR'] as const).map((pattern, i) => (
-            <tr class={`border-t border-gray-800 ${i % 2 === 0 ? '' : 'bg-gray-900/20'}`}>
-              <td class="px-4 py-3 text-gray-400 font-mono text-xs">{pattern}</td>
+            <tr class="border-t" style={`border-color: var(--neutral-calcaire); ${i % 2 !== 0 ? 'background-color: #f1f5f9;' : 'background-color: white;'}`}>
+              <td class="px-4 py-3 font-mono text-xs" style="color: var(--primary-abime);">{pattern}</td>
               {frameworks.map(f => (
                 <td class="px-4 py-3 text-center">
                   {f.renderPatterns.includes(pattern) ? '✅' : '—'}
@@ -114,7 +114,7 @@ const ecosystemLabels = { 'tres-grand': '★★★★', grand: '★★★', moye
 
     <!-- Matrice de decision -->
     <div class="mt-16">
-      <h2 class="text-2xl font-bold text-white mb-6">Matrice de decision</h2>
+      <h2 class="text-2xl font-bold mb-6" style="color: var(--primary-abime);">Matrice de decision</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {[
           { criteria: 'Enterprise Scale', winner: 'Angular', why: 'Structure predictible et stabilite long terme', color: '#DD0031' },
@@ -124,10 +124,10 @@ const ecosystemLabels = { 'tres-grand': '★★★★', grand: '★★★', moye
           { criteria: 'Rapid Onboarding', winner: 'Vue', why: 'Syntaxe template intuitive, courbe douce', color: '#42B883' },
           { criteria: 'AI-First Development', winner: 'React / Next.js', why: '4x donnees entrainement, Vercel AI SDK', color: '#61DAFB' },
         ].map(row => (
-          <div class="bg-gray-900 border border-gray-800 rounded-xl p-5">
-            <div class="text-xs text-gray-500 uppercase tracking-wider mb-2">{row.criteria}</div>
+          <div class="bg-white border rounded-xl p-5" style="border-color: var(--neutral-calcaire);">
+            <div class="text-xs uppercase tracking-wider mb-2" style="color: #64748b;">{row.criteria}</div>
             <div class="text-lg font-bold mb-1" style={`color: ${row.color}`}>{row.winner}</div>
-            <div class="text-sm text-gray-400">{row.why}</div>
+            <div class="text-sm" style="color: #475569;">{row.why}</div>
           </div>
         ))}
       </div>
