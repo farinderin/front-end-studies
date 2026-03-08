@@ -42,15 +42,30 @@ jobs:
           const fs = require('fs');
           const app = express();
           const port = process.env.PORT || 8080;
+          
           app.use(express.static(path.join(__dirname, '/')));
+          
           app.get('*', (req, res) => {
-            const possibleIndexPath = path.join(__dirname, req.path, 'index.html');
-            if (fs.existsSync(possibleIndexPath)) {
-              res.sendFile(possibleIndexPath);
-            } else {
+            try {
+              let reqPath = req.path;
+              if (reqPath.endsWith('/')) {
+                reqPath = reqPath.slice(0, -1);
+              }
+              const exactFilePath = path.join(__dirname, reqPath);
+              if (fs.existsSync(exactFilePath) && fs.statSync(exactFilePath).isFile()) {
+                return res.sendFile(exactFilePath);
+              }
+              const dirIndexPath = path.join(__dirname, reqPath, 'index.html');
+              if (fs.existsSync(dirIndexPath) && fs.statSync(dirIndexPath).isFile()) {
+                return res.sendFile(dirIndexPath);
+              }
               res.sendFile(path.join(__dirname, 'index.html'));
+            } catch (err) {
+              console.error(err);
+              res.status(500).send('Server Error');
             }
           });
+          
           app.listen(port, () => console.log('Server listening on port ' + port));
           EOF
 
