@@ -35,7 +35,7 @@ jobs:
         run: |
           cp package-lock.json dist/
           # Inject start script into the original package.json so Azure App Service knows how to run it
-          jq '.scripts.start = "HOST=0.0.0.0 PORT=8080 node ./server/entry.mjs"' package.json > dist/package.json
+          jq '.scripts.start = "HOST=0.0.0.0 node ./server/entry.mjs"' package.json > dist/package.json
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
