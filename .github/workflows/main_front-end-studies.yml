@@ -19,11 +19,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '22.x'
 
       - name: npm install, build, and test
+        working-directory: ./app
         run: |
           npm install
           npm run build --if-present
@@ -33,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: ./app/dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,6 +48,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+          path: ./app/dist
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -62,5 +64,4 @@ jobs:
           app-name: ${{ secrets.AZURE_APP_SERVICE_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           slot-name: 'Production'
-          package: .
-          
+          package: ./app/dist
