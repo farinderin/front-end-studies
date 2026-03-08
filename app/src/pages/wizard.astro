@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Wizard from '../components/wizard/Wizard';
+---
+
+<BaseLayout title="Wizard de decision" description="Trouvez le framework ideal pour votre projet en 6 questions.">
+  <div class="max-w-4xl mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h1 class="text-3xl font-bold text-white mb-3">Wizard de decision</h1>
+      <p class="text-gray-400">Repondez a 6 questions pour obtenir une recommandation personnalisee.</p>
+    </div>
+    <Wizard client:load />
+  </div>
+</BaseLayout>

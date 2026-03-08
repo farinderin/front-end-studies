@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Choisissez le bon framework frontend pour votre projet.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} — Framework Selector</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-gray-950 text-gray-100 min-h-screen">
+    <header class="border-b border-gray-800 sticky top-0 z-50 bg-gray-950/95 backdrop-blur">
+      <nav class="max-w-7xl mx-auto px-4 h-14 flex items-center gap-6">
+        <a href="/" class="font-bold text-white text-lg tracking-tight">⚡ Framework Selector</a>
+        <div class="flex-1" />
+        <a href="/wizard" class="text-sm text-indigo-400 hover:text-indigo-300 font-medium transition-colors">Wizard</a>
+        <a href="/compare" class="text-sm text-gray-400 hover:text-white transition-colors">Comparer</a>
+        <a href="/demos" class="text-sm text-gray-400 hover:text-white transition-colors">Demos</a>
+        <div class="h-4 w-px bg-gray-700" />
+        <a href="/frameworks/react" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">React</a>
+        <a href="/frameworks/angular" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">Angular</a>
+        <a href="/frameworks/vue" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">Vue</a>
+        <a href="/frameworks/svelte" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">Svelte</a>
+        <a href="/frameworks/astro" class="text-sm text-gray-500 hover:text-gray-300 transition-colors">Astro</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="border-t border-gray-800 mt-24 py-8 text-center text-sm text-gray-600">
+      Source : notebook NotebookLM <em>front-end-studies-2025-2026</em>
+    </footer>
+  </body>
+</html>

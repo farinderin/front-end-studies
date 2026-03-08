@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { frameworks, type Framework } from '../../data/frameworks';
+
+export function getStaticPaths() {
+  return frameworks.map(f => ({ params: { slug: f.id }, props: { framework: f } }));
+}
+
+interface Props { framework: Framework; }
+const { framework: f } = Astro.props;
+
+const learningLabel = { facile: '🟢 Facile', moderee: '🟡 Moderee', difficile: '🔴 Difficile' };
+const ecosystemLabel = { 'tres-grand': '★★★★ Tres grand', grand: '★★★ Grand', moyen: '★★ Moyen', petit: '★ Petit' };
+---
+
+<BaseLayout title={`${f.name} ${f.version}`} description={f.tagline}>
+  <div class="max-w-4xl mx-auto px-4 py-16">
+    <!-- Header -->
+    <div class="mb-10">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-5xl">{f.icon}</span>
+        <div>
+          <h1 class="text-3xl font-bold" style={`color: ${f.color}`}>
+            {f.name} <span class="text-gray-500 text-xl font-normal">{f.version}</span>
+          </h1>
+          <p class="text-gray-400 mt-1">{f.tagline}</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        {f.renderPatterns.map(p => (
+          <span class="text-xs bg-gray-800 border border-gray-700 text-gray-300 px-2 py-1 rounded font-mono">{p}</span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Benchmarks -->
+    <section class="mb-10">
+      <h2 class="text-lg font-semibold text-white mb-4">Benchmarks</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+        {[
+          { label: 'Bundle starter', value: f.benchmarks.bundleStarter },
+          { label: 'TTI', value: f.benchmarks.tti },
+          { label: 'RPS serveur', value: f.benchmarks.rps },
+          { label: 'Adoption', value: f.benchmarks.adoption },
+          { label: 'Satisfaction', value: f.benchmarks.satisfaction },
+        ].map(b => (
+          <div class="bg-gray-900 border border-gray-800 rounded-lg p-3">
+            <div class="text-xs text-gray-500 mb-1">{b.label}</div>
+            <div class="font-mono font-bold text-white">{b.value || '—'}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-10">
+      <!-- Ideal pour -->
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-4">✅ Ideal pour</h2>
+        <ul class="space-y-2">
+          {f.idealFor.map(item => (
+            <li class="flex gap-2 text-sm text-gray-300">
+              <span class="text-green-500 shrink-0">•</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- A eviter -->
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-4">⚠️ A eviter si</h2>
+        <ul class="space-y-2">
+          {f.notIdealFor.map(item => (
+            <li class="flex gap-2 text-sm text-gray-300">
+              <span class="text-yellow-500 shrink-0">•</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-10">
+      <!-- Points forts -->
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-4">Points forts</h2>
+        <ul class="space-y-2">
+          {f.strengths.map(item => (
+            <li class="flex gap-2 text-sm text-gray-300">
+              <span class="text-indigo-400 shrink-0">+</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- Points faibles -->
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-4">Points faibles</h2>
+        <ul class="space-y-2">
+          {f.weaknesses.map(item => (
+            <li class="flex gap-2 text-sm text-gray-300">
+              <span class="text-red-400 shrink-0">−</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+
+    <!-- Caracteristiques -->
+    <section class="mb-10">
+      <h2 class="text-lg font-semibold text-white mb-4">Caracteristiques</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="bg-gray-900 border border-gray-800 rounded-lg p-3">
+          <div class="text-xs text-gray-500 mb-1">Meta-framework</div>
+          <div class="text-sm text-white font-medium">{f.metaFramework}</div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-lg p-3">
+          <div class="text-xs text-gray-500 mb-1">Courbe apprentissage</div>
+          <div class="text-sm">{learningLabel[f.learningCurve]}</div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-lg p-3">
+          <div class="text-xs text-gray-500 mb-1">Ecosysteme</div>
+          <div class="text-sm text-yellow-400">{ecosystemLabel[f.ecosystem]}</div>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-lg p-3">
+          <div class="text-xs text-gray-500 mb-1">Mobile natif</div>
+          <div class="text-sm">{f.mobileCrossplatform ? '✅ Oui (React Native)' : '— Non'}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI-First -->
+    <section class="mb-10 bg-gray-900 border border-gray-800 rounded-xl p-6">
+      <h2 class="text-lg font-semibold text-white mb-3">
+        🤖 Compatibilite AI-First
+        <span class="ml-2 text-yellow-400">{'★'.repeat(f.aiFirst.score)}{'☆'.repeat(5 - f.aiFirst.score)}</span>
+      </h2>
+      <p class="text-sm text-gray-300">{f.aiFirst.notes}</p>
+    </section>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-12 pt-6 border-t border-gray-800">
+      <a href="/compare" class="text-sm text-gray-400 hover:text-white transition-colors">← Matrice comparative</a>
+      <a href="/wizard" class="text-sm text-indigo-400 hover:text-indigo-300 transition-colors">Utiliser le wizard →</a>
+    </div>
+  </div>
+</BaseLayout>

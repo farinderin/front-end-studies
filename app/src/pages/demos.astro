@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CounterReact from '../components/demos/CounterReact';
+import CounterVue from '../components/demos/CounterVue.vue';
+import CounterSvelte from '../components/demos/CounterSvelte.svelte';
+
+const demoCode = {
+  react: `import { useState } from 'react';
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <div>{count}</div>
+      <button onClick={() => setCount(c => c - 1)}>−</button>
+      <button onClick={() => setCount(0)}>reset</button>
+      <button onClick={() => setCount(c => c + 1)}>+</button>
+    </div>
+  );
+}`,
+  vue: `<script setup lang="ts">
+import { ref } from 'vue';
+const count = ref(0);
+</script>
+
+<template>
+  <div>
+    <div>{{ count }}</div>
+    <button @click="count--">−</button>
+    <button @click="count = 0">reset</button>
+    <button @click="count++">+</button>
+  </div>
+</template>`,
+  svelte: `<script lang="ts">
+  let count = $state(0);
+</script>
+
+<div>
+  <div>{count}</div>
+  <button onclick={() => count--}>−</button>
+  <button onclick={() => count = 0}>reset</button>
+  <button onclick={() => count++}>+</button>
+</div>`,
+};
+---
+
+<BaseLayout title="Demos Islands" description="Le meme composant implemente en React, Vue et Svelte sur la meme page Astro.">
+  <div class="max-w-5xl mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h1 class="text-3xl font-bold text-white mb-3">Islands Architecture en action</h1>
+      <p class="text-gray-400 max-w-2xl mx-auto">
+        Le meme composant — un compteur interactif — implemente en React, Vue et Svelte,
+        tous hydrates independamment sur cette page Astro statique.
+      </p>
+      <div class="mt-4 inline-flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-full px-4 py-1.5 text-xs text-gray-400">
+        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+        3 islands actives — le reste de la page : 0 KB de JS
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- React Island -->
+      <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
+        <div class="p-4 border-b border-gray-800 flex items-center gap-3">
+          <span class="text-xl">⚛️</span>
+          <div>
+            <div class="font-semibold text-white text-sm">React 19</div>
+            <div class="text-xs text-gray-500">useState + JSX</div>
+          </div>
+          <div class="ml-auto flex gap-1">
+            <span class="text-xs bg-blue-900/50 text-blue-400 border border-blue-800 px-2 py-0.5 rounded">32–40 KB</span>
+            <span class="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">350ms TTI</span>
+          </div>
+        </div>
+        <CounterReact client:load />
+        <div class="p-4 border-t border-gray-800">
+          <pre class="text-xs text-gray-400 overflow-x-auto leading-relaxed"><code>{demoCode.react}</code></pre>
+        </div>
+      </div>
+
+      <!-- Vue Island -->
+      <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
+        <div class="p-4 border-b border-gray-800 flex items-center gap-3">
+          <span class="text-xl">💚</span>
+          <div>
+            <div class="font-semibold text-white text-sm">Vue 3.6</div>
+            <div class="text-xs text-gray-500">ref() + template</div>
+          </div>
+          <div class="ml-auto flex gap-1">
+            <span class="text-xs bg-green-900/50 text-green-400 border border-green-800 px-2 py-0.5 rounded">18–22 KB</span>
+            <span class="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">300ms TTI</span>
+          </div>
+        </div>
+        <CounterVue client:load />
+        <div class="p-4 border-t border-gray-800">
+          <pre class="text-xs text-gray-400 overflow-x-auto leading-relaxed"><code>{demoCode.vue}</code></pre>
+        </div>
+      </div>
+
+      <!-- Svelte Island -->
+      <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
+        <div class="p-4 border-b border-gray-800 flex items-center gap-3">
+          <span class="text-xl">🔥</span>
+          <div>
+            <div class="font-semibold text-white text-sm">Svelte 5</div>
+            <div class="text-xs text-gray-500">$state (Runes)</div>
+          </div>
+          <div class="ml-auto flex gap-1">
+            <span class="text-xs bg-orange-900/50 text-orange-400 border border-orange-800 px-2 py-0.5 rounded">&lt;10 KB</span>
+            <span class="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">200ms TTI</span>
+          </div>
+        </div>
+        <CounterSvelte client:load />
+        <div class="p-4 border-t border-gray-800">
+          <pre class="text-xs text-gray-400 overflow-x-auto leading-relaxed"><code>{demoCode.svelte}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Note Islands -->
+    <div class="mt-10 bg-gray-900 border border-dashed border-gray-700 rounded-xl p-6 text-sm text-gray-400">
+      <p class="font-semibold text-white mb-2">Pourquoi Astro pour cette demo ?</p>
+      <p>
+        Astro est le seul framework qui peut embarquer des composants React, Vue et Svelte
+        <strong class="text-white"> sur la meme page</strong> via son systeme d'Islands.
+        Chaque island est hydratee independamment (<code class="text-indigo-300">client:load</code>).
+        Le reste du contenu est du HTML statique — zero overhead, meilleur LCP.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
